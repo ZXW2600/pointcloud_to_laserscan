@@ -88,6 +88,7 @@ private:
   std::string target_frame_;
   double tolerance_;
   double min_height_, max_height_, angle_min_, angle_max_, angle_increment_, scan_time_, range_min_, range_max_;
+  double dead_zone_x_min,dead_zone_x_max,dead_zone_y_min,dead_zone_y_max;
   bool use_inf_;
   double inf_epsilon_;
 };

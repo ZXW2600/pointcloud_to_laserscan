@@ -1,32 +1,30 @@
 <?xml version="1.0"?>
 
 <launch>
-    <param name="/use_sim_time" value="true" />
-
     <!-- run pointcloud_to_laserscan node -->
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
 
-        <remap from="cloud_in" to="/red_1/velodyne"/>
-        <remap from="scan" to="/red_1/3d_scan"/>
+        <remap from="cloud_in" to="/red_1/pointcloud"/>
+        <remap from="scan" to="/red_1/scan_3d"/>
         <rosparam>
             target_frame: red_1/base_link # Leave disabled to output scan in pointcloud frame
             transform_tolerance: 0.01
-            min_height: 0.05
-            max_height: 1
+            min_height: 0
+            max_height: 0.5
 
-            angle_min: -1.5708 # -M_PI/2
-            angle_max: 1.5708 # M_PI/2
-            angle_increment: 0.0087 # M_PI/360.0
+            angle_min: -2 # -M_PI/2
+            angle_max: 2 # M_PI/2
+            angle_increment: 0.004 # M_PI/360.0
             scan_time: 0
-            range_min: 0.45
-            range_max: 4.0
+            range_min: 0.2
+            range_max: 10
             use_inf: true
             inf_epsilon: 1.0
 
-            dead_zone_x_min: -0.3
-            dead_zone_x_max:0.3 
-            dead_zone_y_min:-0.5
-            dead_zone_y_max:0.5
+            dead_zone_x_min: -0.2
+            dead_zone_x_max: 0.2
+            dead_zone_y_min: -0.3
+            dead_zone_y_max: 0.3
 
             # Concurrency level, affects number of pointclouds queued for processing and number of threads used
             # 0 : Detect number of cores

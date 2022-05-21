@@ -1,33 +1,15 @@
 <?xml version="1.0"?>
 
 <launch>
+        <!-- 颜色ID参数 -->
+        <arg name="id" default="1" />
+        <arg name="color" default="red" />
+    
     <!-- run pointcloud_to_laserscan node -->
     <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+        <rosparam file="$(find pointcloud_to_laserscan)/config/icra_config.yaml" command="load"  subst_value="true"/>
         <rosparam>
-            target_frame: red_1/base_link # Leave disabled to output scan in pointcloud frame
-            transform_tolerance: 0.01
-            min_height: 0.15
-            max_height: 0.5
-
-            angle_min: -2 # -M_PI/2
-            angle_max: 2 # M_PI/2
-            angle_increment: 0.002 # M_PI/360.0
-            scan_time: 0
-            range_min: 0.2
-            range_max: 10
-            use_inf: true
-            inf_epsilon: 1.0
-
-            dead_zone_x_min: -0.3
-            dead_zone_x_max: 0.3
-            dead_zone_y_min: -0.4
-            dead_zone_y_max: 0.4
-
-            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
-            # 0 : Detect number of cores
-            # 1 : Single threaded
-            # 2->inf : Parallelism level
-            concurrency_level: 1
+          
         </rosparam>
         <!-- <remap from="cloud_in" to="cloud_in"/> -->
         <remap from="scan" to="scan_3d"/>
